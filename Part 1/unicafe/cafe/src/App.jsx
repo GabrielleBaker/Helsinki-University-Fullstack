@@ -10,6 +10,40 @@ import { useState } from 'react'
   )
 }
 
+ //title sections component
+ const Titles =({text})=><h1>{text}</h1>
+
+//statistics component
+const Stats = ({good, bad, neutral, all}) => {
+    
+  let average ;
+  if (all !==0 ){
+      average= (good - bad) / all;}
+      else {average =0;}
+
+  let positive ;
+  if(all !== 0){
+     positive = (good / all) * 100;}
+     else {positive =0;}
+
+  return(
+    <p>
+    Good: {good} 
+    <br></br>
+    Neutral: {neutral} 
+    <br></br>
+    Bad: {bad}
+    <br></br>
+    All: {all}
+    <br></br>
+    Average: {average} 
+    <br></br>
+    Positive: {positive} %
+    </p>
+
+  )
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0);
@@ -34,46 +68,13 @@ const App = () => {
     setAll(all+1)
   }
 
-  //title sections component
-  const Titles =({text})=><h1>{text}</h1>
-
-  //statistics component
-  const Stats = () => {
-    
-    let average ;
-    if (all !==0 ){
-        average= (good - bad) / all;}
-        else {average =0;}
-
-    let positive ;
-    if(all !== 0){
-       positive = (good / all) * 100;}
-       else {positive =0;}
-
-    return(
-      <p>
-      Good: {good} 
-      <br></br>
-      Neutral: {neutral} 
-      <br></br>
-      Bad: {bad}
-      <br></br>
-      All: {all}
-      <br></br>
-      Average: {average} 
-      <br></br>
-      Positive: {positive} %
-      </p>
-
-    )
-  }
 
   return (
     <div>
       <Titles text={'Give feedback'}/>
       <Buttons onPress={setGoodTo} text='Good'/> <Buttons onPress={setNeutralTo} text='Neutral'/> <Buttons onPress={setBadTo} text='Bad'/>
       <Titles text={'Statistics'}/>
-      <Stats/>
+      <Stats good={good} bad={bad} neutral={neutral} all={all}/>
     </div>
   )
 }
