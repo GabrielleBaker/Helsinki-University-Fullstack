@@ -13,16 +13,18 @@ import { useState } from 'react'
  //title sections component
  const Titles =({text})=><h1>{text}</h1>
 
-//statistics component
+//statistics component exercise 1.8
 const Stats = ({good, bad, neutral, all}) => {
 
   //message if no feedback given yet
+  //exercise 1.9
   if(all===0){
       return(
         <p>No feedback given</p>
       );
   }  
   //once feedback has been given
+  //exercise 1.7 more stats
   else{
     let average ;
     if (all !==0 ){
@@ -35,23 +37,26 @@ const Stats = ({good, bad, neutral, all}) => {
        else {positive =0;}
   
     return(
-      <p>
-      Good: {good} 
-      <br></br>
-      Neutral: {neutral} 
-      <br></br>
-      Bad: {bad}
-      <br></br>
-      All: {all}
-      <br></br>
-      Average: {average} 
-      <br></br>
-      Positive: {positive} %
-      </p>
+      <div>
+      <StatisticLine text='Good:' value={good}/> 
+      <StatisticLine text='Neutral:' value={neutral}/> 
+      <StatisticLine text='Bad:' value={bad}/> 
+      <StatisticLine text='All:' value={all}/> 
+      <StatisticLine text='Average:' value={average}/>
+      <StatisticLine text='Positive:' value={positive}/>
+      </div>
   
     )
   }
-  
+}
+// statistic line component exercise 1.10
+const StatisticLine = ({text,value})=>{
+return(
+  <>
+    {text} {value}
+    <br></br>
+  </>
+)
 }
 
 const App = () => {
