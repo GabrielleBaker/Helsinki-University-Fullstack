@@ -15,33 +15,43 @@ import { useState } from 'react'
 
 //statistics component
 const Stats = ({good, bad, neutral, all}) => {
-    
-  let average ;
-  if (all !==0 ){
-      average= (good - bad) / all;}
-      else {average =0;}
 
-  let positive ;
-  if(all !== 0){
-     positive = (good / all) * 100;}
-     else {positive =0;}
-
-  return(
-    <p>
-    Good: {good} 
-    <br></br>
-    Neutral: {neutral} 
-    <br></br>
-    Bad: {bad}
-    <br></br>
-    All: {all}
-    <br></br>
-    Average: {average} 
-    <br></br>
-    Positive: {positive} %
-    </p>
-
-  )
+  //message if no feedback given yet
+  if(all===0){
+      return(
+        <p>No feedback given</p>
+      );
+  }  
+  //once feedback has been given
+  else{
+    let average ;
+    if (all !==0 ){
+        average= (good - bad) / all;}
+        else {average =0;}
+  
+    let positive ;
+    if(all !== 0){
+       positive = (good / all) * 100;}
+       else {positive =0;}
+  
+    return(
+      <p>
+      Good: {good} 
+      <br></br>
+      Neutral: {neutral} 
+      <br></br>
+      Bad: {bad}
+      <br></br>
+      All: {all}
+      <br></br>
+      Average: {average} 
+      <br></br>
+      Positive: {positive} %
+      </p>
+  
+    )
+  }
+  
 }
 
 const App = () => {
