@@ -9,6 +9,11 @@ import { useState } from 'react'
       </button>
   )
 }
+
+ //title sections component
+ const Titles =({text})=><h1>{text}</h1>
+
+
 //returns the anecdote selected
 const AnecText = ({anecdotes,selected})=>{
   return(
@@ -25,6 +30,32 @@ const VoteCount = ({anecdotes, index})=>{
       has {anecdotes[index].votes} votes.
     </p>
   )
+}
+
+const PopularAnec = ({anecdotes}) => {
+  //use math.max and map to iterate array and find largest vote count
+  //https://www.w3schools.com/jsref/jsref_max.asp
+  const mostVotes = Math.max(...anecdotes.map(anecdote=>anecdote.votes))
+  //use find to locate index of the anecdote with most votes
+  //https://www.w3schools.com/jsref/jsref_find.asp
+  const mostVotedAnecdote = anecdotes.find(anecdote=>(anecdote.votes===mostVotes));
+  
+    if(mostVotes > 0){
+      return(
+        <div>
+          <p>
+            {mostVotedAnecdote.text}
+            </p>
+          <p>
+            has {mostVotedAnecdote.votes} votes
+          </p>
+          </div>
+      )}
+      else{
+        return(
+          <p>No votes yet</p>
+        )
+      }
 }
 
 const App = () => {
@@ -46,13 +77,15 @@ const App = () => {
 //get length of anecdotes array set as max, math.floor(math.random *max)
 // will start from zero and go to the max -1 so no need to + or - 1 for array length
 //set selected anecdote to random number
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   const setChoice = () => {
     let max =anecdotes.length;
     const randomNumber = Math.floor(Math.random()*max);
     setSelected(randomNumber);
    // console.log(randomNumber);
   }
-   
+  
+
   const setVote = () => {
     const newAnecdotes = anecdotes.map((anecdote, index) => {
       if(index === selected){
@@ -66,9 +99,12 @@ const App = () => {
 
   return (
     <div>
+      <Titles text={'Anecdote of the Day'}/>
       <AnecText anecdotes={anecdotes} selected={selected}/>
       <Buttons text ='Next anecdote' onPress={setChoice}/>
       <Buttons text ='Vote' onPress={setVote}/>
+      <Titles text={'Anecdote with most votes'}/>
+      <PopularAnec anecdotes={anecdotes}/>
     </div>
   )
 }
