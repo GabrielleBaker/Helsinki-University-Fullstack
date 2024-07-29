@@ -33,11 +33,10 @@ const VoteCount = ({anecdotes, index})=>{
 }
 
 const PopularAnec = ({anecdotes}) => {
-  //use math.max and map to iterate array and map to new array of votes only
-  //and find largest vote count from that
+  //use math.max and map to iterate array and find largest vote count
   //https://www.w3schools.com/jsref/jsref_max.asp
   const mostVotes = Math.max(...anecdotes.map(anecdote=>anecdote.votes))
-  //use find to locate index of the anecdote with most votes from original anecdotes array and return it
+  //use find to locate index of the anecdote with most votes
   //https://www.w3schools.com/jsref/jsref_find.asp
   const mostVotedAnecdote = anecdotes.find(anecdote=>(anecdote.votes===mostVotes));
   
