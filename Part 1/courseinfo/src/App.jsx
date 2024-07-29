@@ -1,22 +1,6 @@
 const Header = ({course}) => <h1>{course}</h1>
 
-const Total =({parts})=>{
-
-  const exerciseArray = parts.map((item) => item.exercises);
-  let sum=0;
-
-  //for each loop through and add it to the sum
-  exerciseArray.forEach((exercise)=>{
-    sum+=exercise;
-  });
-
-  return(
-    <div>
-      <h3>Total number of {sum} exercises</h3>
-    </div>
-
-  )
-}
+const Total = ({ sum }) => <p>Number of exercises {sum}</p>
 
  const Part = ({ part }) => 
      <>
@@ -42,7 +26,7 @@ return (
   <div>
   <Header course={course.name}/>
   <Content parts={course.parts}/>
-  <Total parts={course.parts}/>
+  
   </div>
 )
 }
