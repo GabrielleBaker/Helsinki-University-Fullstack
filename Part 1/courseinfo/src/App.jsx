@@ -1,20 +1,13 @@
 const Header = ({course}) => <h1>{course}</h1>
 
 const Total =({parts})=>{
-
-  const exerciseArray = parts.map((item) => item.exercises);
-  let sum=0;
-
-  //for each loop through and add it to the sum
-  exerciseArray.forEach((exercise)=>{
-    sum+=exercise;
-  });
+  //reduce iterates through array adding each item value to the sum
+  //reduce takes a function + an initial value as params
+  //initial value is 0 here, it sets sum to 0 at start.
+ const totalSum = parts.reduce((sum,item)=> sum + item.exercises,0);
 
   return(
-    <div>
-      <h3>Total number of {sum} exercises</h3>
-    </div>
-
+      <h3>Total number of {totalSum} exercises</h3>
   )
 }
 
