@@ -1,3 +1,4 @@
+import axios from 'axios';
 const Form = ({
   newName,
   newNumber,
@@ -16,7 +17,7 @@ const addPerson = (event) => {
   const personObject = {
     name: newName,
     number: newNumber,
-    id: persons.length+1
+    //id: persons.length+1
   };
 
   //check if person already exists using find. find method returns first match from array
@@ -32,11 +33,18 @@ const addPerson = (event) => {
     //console.log('person exists');
   } else {
    //console.log(personObject.id);
-    setPersons(persons.concat(personObject));
+    axios
+    .post('http://localhost:3001/persons', personObject)
+    .then(response => {
+      setPersons(persons.concat(personObject));
+      console.log(response)
+    })
   }
 
   setNewName('');
   setNewNumber('');
+
+
 };
 
     return(
