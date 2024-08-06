@@ -1,4 +1,6 @@
-import axios from 'axios';
+//import axios from 'axios';
+import personService from '../services/persons'
+
 const Form = ({
   newName,
   newNumber,
@@ -33,12 +35,13 @@ const addPerson = (event) => {
     //console.log('person exists');
   } else {
    //console.log(personObject.id);
-    axios
-    .post('http://localhost:3001/persons', personObject)
-    .then(response => {
-      setPersons(persons.concat(personObject));
-      console.log(response)
-    })
+   personService
+    .create(personObject)
+    .then(returnedPerson => {
+      setPersons(persons.concat(returnedPerson))
+     
+   })
+
   }
 
   setNewName('');

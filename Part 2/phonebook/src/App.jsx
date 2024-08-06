@@ -3,6 +3,7 @@ import axios from 'axios';
 import Form from './components/Form';
 import Search from './components/Search';
 import AllPersons from './components/AllPersons';
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -13,11 +14,10 @@ const App = () => {
 
   //fetching data from server
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-     //   console.log('promise fulfilled')
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
 
