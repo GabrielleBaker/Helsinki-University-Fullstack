@@ -11,7 +11,8 @@ const App = () => {
   const [newNumber, setNewNumber]=useState('');
   const [showAll, setShowAll] = useState(true);
   const [searchName,setSearchName]=useState('');
-  const [Message, setMessage] = useState(null)
+  const [Message, setMessage] = useState(null);
+  const [color, setColor] = useState('');
 
   //fetching data from server
   useEffect(() => {
@@ -42,7 +43,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={Message} />
+      <Notification message={Message} color={color}/>
         <Search 
           handleSearchChange={handleSearchChange}
           searchName={searchName}
@@ -57,6 +58,7 @@ const App = () => {
           handleNumberChange={handleNumberChange}
           handlePersonChange={handlePersonChange}
           setMessage={setMessage}
+          setColor={setColor}
       />
        <h2>Numbers</h2>
         <AllPersons 
@@ -64,6 +66,8 @@ const App = () => {
           searchName={searchName} 
           showAll={showAll}
           setPersons={setPersons}
+          setColor={setColor}
+          setMessage={setMessage}
           />
     </div>
   );

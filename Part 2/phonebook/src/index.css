@@ -1,5 +1,14 @@
-.notification {
+.green {
   color: rgb(0, 178, 33);
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.red {
+  color: rgb(178, 0, 0);
   background: lightgrey;
   font-size: 20px;
   border-style: solid;

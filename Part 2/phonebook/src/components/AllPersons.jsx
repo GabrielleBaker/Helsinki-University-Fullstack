@@ -1,6 +1,6 @@
 import Person from "./Person"
 import personService from '../services/persons'
-const AllPersons = ({ persons, showAll,searchName,setPersons }) => {
+const AllPersons = ({ persons, showAll,searchName,setPersons,setColor, setMessage }) => {
     //filtering people 
 
    // if showAll is true, all persons show,
@@ -23,6 +23,21 @@ const AllPersons = ({ persons, showAll,searchName,setPersons }) => {
         .remove(id)
         .then(()=>{
           setPersons(persons.filter(p => p.id !== id))
+          //notification
+          setColor('green')
+          setMessage(`${person.name} was deleted successfully`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          })
+       
+      //error handling notification
+      .catch(error => {
+        setColor('red')
+        setMessage(`${person.name} was already removed from server`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
     }
   }

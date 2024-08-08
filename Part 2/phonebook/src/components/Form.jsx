@@ -10,7 +10,8 @@ const Form = ({
   setNewNumber,
   handleNumberChange,
   handlePersonChange,
-  setMessage
+  setMessage,
+  setColor
 }) => {
 
 //adding new person to phonebook
@@ -43,7 +44,16 @@ const addPerson = (event) => {
         .then(returnedPerson => {
           setPersons(persons.map(person=>person.id !== existingPerson.id ? person : returnedPerson))
           //notification
+          setColor('green')
           setMessage(`${personObject.name} was updated successfully`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+        })
+        //error handling notification
+        .catch(error => {
+          setColor('red')
+          setMessage(`${newName} was already removed from server`)
           setTimeout(() => {
             setMessage(null)
           }, 5000)
@@ -56,12 +66,14 @@ const addPerson = (event) => {
     .create(personObject)
     .then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
-      //notification
-      setMessage(`${personObject.name} was added successfully`)
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
+      
    })
+   //notification
+   setColor('green')
+   setMessage(`${personObject.name} was added successfully`)
+   setTimeout(() => {
+     setMessage(null)
+   }, 5000)
 
   }
 
