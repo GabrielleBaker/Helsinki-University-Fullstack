@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import Form from './components/Form';
 import Search from './components/Search';
 import AllPersons from './components/AllPersons';
-import personService from './services/persons'
+import personService from './services/persons';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -10,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber]=useState('');
   const [showAll, setShowAll] = useState(true);
   const [searchName,setSearchName]=useState('');
+  const [Message, setMessage] = useState(null)
 
   //fetching data from server
   useEffect(() => {
@@ -40,6 +42,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={Message} />
         <Search 
           handleSearchChange={handleSearchChange}
           searchName={searchName}
@@ -53,6 +56,7 @@ const App = () => {
           setNewNumber={setNewNumber}
           handleNumberChange={handleNumberChange}
           handlePersonChange={handlePersonChange}
+          setMessage={setMessage}
       />
        <h2>Numbers</h2>
         <AllPersons 

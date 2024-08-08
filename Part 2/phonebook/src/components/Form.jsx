@@ -9,7 +9,8 @@ const Form = ({
   setNewName,
   setNewNumber,
   handleNumberChange,
-  handlePersonChange
+  handlePersonChange,
+  setMessage
 }) => {
 
 //adding new person to phonebook
@@ -41,6 +42,11 @@ const addPerson = (event) => {
         .update(existingPerson.id, {...existingPerson,number:newNumber})
         .then(returnedPerson => {
           setPersons(persons.map(person=>person.id !== existingPerson.id ? person : returnedPerson))
+          //notification
+          setMessage(`${personObject.name} was updated successfully`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         })
     }
     //console.log('person exists');
@@ -50,6 +56,11 @@ const addPerson = (event) => {
     .create(personObject)
     .then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
+      //notification
+      setMessage(`${personObject.name} was added successfully`)
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
    })
 
   }
