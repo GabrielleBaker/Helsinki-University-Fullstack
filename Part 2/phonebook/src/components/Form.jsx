@@ -20,7 +20,7 @@ const addPerson = (event) => {
     name: newName,
     number: newNumber,
     //id: persons.length+1
-  };
+  }
 
   //check if person already exists using find. find method returns first match from array
   //object reference equality doesnt factor when using find.name
@@ -28,10 +28,21 @@ const addPerson = (event) => {
   //but using find person.name and personobject.name compares the value of properties not the 
   //objects themselves
   //if a match is not found, returns undefined 
+  
   const existingPerson = persons.find(person => person.name === personObject.name);
 
   if (existingPerson) {
-    alert(`${newName} is already added to phonebook`)
+    
+    //alert(`${newName} is already added to phonebook`)
+    if (window.confirm(`${newName} is already added to the phonebook, replace
+      the old number with the new one?`)){
+        personService
+        //need to get the id and use it to update the person object
+        .update(existingPerson.id, {...existingPerson,number:newNumber})
+        .then(returnedPerson => {
+          setPersons(persons.map(person=>person.id !== existingPerson.id ? person : returnedPerson))
+        })
+    }
     //console.log('person exists');
   } else {
    //console.log(personObject.id);
@@ -39,7 +50,6 @@ const addPerson = (event) => {
     .create(personObject)
     .then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
-     
    })
 
   }

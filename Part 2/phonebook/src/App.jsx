@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Form from './components/Form';
 import Search from './components/Search';
 import AllPersons from './components/AllPersons';
@@ -59,7 +58,9 @@ const App = () => {
         <AllPersons 
           persons={persons} 
           searchName={searchName} 
-          showAll={showAll}/>
+          showAll={showAll}
+          setPersons={setPersons}
+          />
     </div>
   );
 };
